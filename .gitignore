@@ -1,0 +1,12 @@
+db.sqlite3
+.idea/
+#temp files
+*~
+#swap files
+*.swp
+*.swo
+#byte-compiled files
+*.pyc
+# Media files
+media/
+

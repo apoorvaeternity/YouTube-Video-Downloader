@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Youtube Video Downloader</title>
+</head>
+<body>
+<div class="jumbotron text-center">
+  <h1>YOUTUBE VIDEO DOWNLOADER</h1>
+  <p>--By Apoorva Pandey</p>
+</div>
+<div class="well well-lg text-center">
+<form method="post" action="">
+    {% csrf_token %}
+    <input class="form-control input-lg" id="inputlg" type="url" name="url" placeholder="Paste the URL here...." required>
+    <br>
+    <input type="submit" class="btn btn-info" value="Get Download Links">
+</form>
+</div>
+<div class="well well-lg" align="center">
+<img src="{{ thumb }}" class="img-rounded">
+<h4>{{ title }}</h4>
+<h4>Duration <span class="glyphicon glyphicon-time"> {{ duration }}</h4>
+<h4>Views <span class="glyphicon glyphicon-eye-open"></span> {{ views }}</h4>
+<h4><span class="glyphicon glyphicon-thumbs-up">{{ likes }}  <span class="glyphicon glyphicon-thumbs-down">{{ dislikes }}</h4>
+    <table class="table table-hover text-center">
+    <thead >
+    <tr class="text-center">
+        <th class="text-center">Resolution</th>
+        <th class="text-center">Size</th>
+        <th class="text-center">File Type</th>
+        <th class="text-center">Download Link</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for resolution,extension,file_size,url in streams %}
+      <tr>
+        <td>{{ resolution }}</td>
+        <td>{{ file_size }}</td>
+        <td>{{ extension }}</td>
+          <td><a href="{{ url }}" download="{{ title }}.{{ extension }}"><span class="glyphicon glyphicon-download-alt"></span> Download</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+</div>
+</body>
+</html>
