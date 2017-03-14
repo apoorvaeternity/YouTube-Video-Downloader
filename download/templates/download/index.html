@@ -2,51 +2,225 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Youtube Video Downloader</title>
+    <style>
+        .hovereffect {
+            width: 100%;
+            height: 100%;
+            float: left;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+            cursor: default;
+        }
+
+        .hovereffect .overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            -webkit-transition: all 1s ease-in-out;
+            transition: all 1s ease-in-out;
+        }
+
+        .hovereffect:hover .overlay {
+            background-color: rgba(170, 170, 170, 0.4);
+        }
+
+        .hovereffect h2, .hovereffect img {
+            -webkit-transition: all 1s ease-in-out;
+            transition: all 1s ease-in-out;
+        }
+
+        .hovereffect img {
+            display: block;
+            position: relative;
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+
+        .hovereffect:hover img {
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            transform: scale(1);
+        }
+
+        .hovereffect h2 {
+            text-transform: uppercase;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            font-size: 17px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hovereffect a.info {
+            display: inline-block;
+            text-decoration: none;
+            padding: 7px 14px;
+            text-transform: uppercase;
+            color: #fff;
+            border: 1px solid #fff;
+            margin: 50px 0 0 0;
+            background-color: transparent;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            -webkit-transform: scale(1.5);
+            -ms-transform: scale(1.5);
+            transform: scale(1.5);
+            -webkit-transition: all 1s ease-in-out;
+            transition: all 1s ease-in-out;
+            font-weight: normal;
+            height: 85%;
+            width: 85%;
+            position: absolute;
+            top: -20%;
+            left: 8%;
+            padding: 70px;
+        }
+
+        .hovereffect:hover a.info {
+            opacity: 1;
+            filter: alpha(opacity=100);
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            transform: scale(1);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+    </style>
 </head>
 <body>
 <div class="jumbotron text-center">
-  <h1>YOUTUBE VIDEO DOWNLOADER</h1>
-  <p>--By Apoorva Pandey</p>
+    <h1>YOUTUBE VIDEO DOWNLOADER</h1>
+    <p>--By Eternity</p>
 </div>
 <div class="well well-lg text-center">
-<form method="post" action="">
-    {% csrf_token %}
-    <input class="form-control input-lg" id="inputlg" type="url" name="url" placeholder="Paste the URL here...." required>
-    <br>
-    <input type="submit" class="btn btn-info" value="Get Download Links">
-</form>
+    <form method="post" action="">
+        {% csrf_token %}
+        <input class="form-control input-lg" id="inputlg" type="url" name="url" placeholder="Paste the URL here...."
+               required
+                {% if url %}
+               value="{{ url }}"
+                {% endif %}>
+        <br>
+        <input type="submit" class="btn btn-info" value="Get Download Links">
+    </form>
 </div>
-<div class="well well-lg" align="center">
-<img src="{{ thumb }}" class="img-rounded">
-<h4>{{ title }}</h4>
-<h4>Duration <span class="glyphicon glyphicon-time"> {{ duration }}</h4>
-<h4>Views <span class="glyphicon glyphicon-eye-open"></span> {{ views }}</h4>
-<h4><span class="glyphicon glyphicon-thumbs-up">{{ likes }}  <span class="glyphicon glyphicon-thumbs-down">{{ dislikes }}</h4>
+{% if title %}
+    <div class="well well-lg" align="center">
+        <div>
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <div class="hovereffect">
+                        <img class="img-responsive" src="{{ thumb }}">
+                    </div>
+                </div>
+                <div class="col-sm-4"></div>
+
+            </div>
+
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col">
+                    <h4>{{ title }}</h4>
+                    <h4>Duration <span class="glyphicon glyphicon-time"> </span>{{ duration }}</h4>
+                    <h4>Views <span class="glyphicon glyphicon-eye-open"></span> {{ views }}</h4>
+                    <h4><span class="glyphicon glyphicon-thumbs-up">{{ likes }}</span> <span
+                            class="glyphicon glyphicon-thumbs-down">{{ dislikes }}</span></h4>
+                    <button class="btn btn-info" data-toggle="collapse" data-target="#description">Description</button>
+
+                    <div id="description" class="collapse" style="text-align:justify;padding: 0% 10% 0% 10%;">
+                        {{ desc }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
     <table class="table table-hover text-center">
-    <thead >
-    <tr class="text-center">
-        <th class="text-center">Resolution</th>
-        <th class="text-center">Size</th>
-        <th class="text-center">File Type</th>
-        <th class="text-center">Download Link</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for resolution,extension,file_size,url in streams %}
-      <tr>
-        <td>{{ resolution }}</td>
-        <td>{{ file_size }}</td>
-        <td>{{ extension }}</td>
-          <td><a href="{{ url }}" download="{{ title }}.{{ extension }}"><span class="glyphicon glyphicon-download-alt"></span> Download</a></td>
-      </tr>
-    {% endfor %}
-    </tbody>
+        <thead>
+        <tr class="text-center">
+            <th class="text-center">Resolution</th>
+            <th class="text-center">Size</th>
+            <th class="text-center">File Type</th>
+            <th class="text-center">Download Link</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for resolution,extension,file_size,url in streams %}
+            <tr>
+                <td>{{ resolution }}</td>
+                <td>{{ file_size }}</td>
+                <td>{{ extension }}</td>
+                <td><a href="{{ url }}" download="{{ title }}.{{ extension }}"><span
+                        class="glyphicon glyphicon-download-alt"></span> Download</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
     </table>
 
-</div>
-</body>
+    <table class="table table-hover text-center">
+        <p align="center">Video Only</p>
+        <thead>
+        <tr class="text-center">
+            <th class="text-center">Resolution</th>
+            <th class="text-center">Size</th>
+            <th class="text-center">File Type</th>
+            <th class="text-center">Download Link</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for resolution,extension,file_size,url in stream_video %}
+            <tr>
+                <td>{{ resolution }}</td>
+                <td>{{ file_size }}</td>
+                <td>{{ extension }}</td>
+                <td><a href="{{ url }}" download="{{ title }}.{{ extension }}"><span
+                        class="glyphicon glyphicon-download-alt"></span> Download</a></td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="table table-hover text-center">
+        <p align="center">Audio Only</p>
+        <thead>
+        <tr class="text-center">
+
+            <th class="text-center">Size</th>
+            <th class="text-center">File Type</th>
+            <th class="text-center">Download Link</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for resolution,extension,file_size,url in stream_audio %}
+            <tr>
+
+                <td>{{ file_size }}</td>
+                <td>{{ extension }}</td>
+                <td><a href="{{ url }}" download="{{ title }}.{{ extension }}"><span
+                        class="glyphicon glyphicon-download-alt"></span> Download</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+{% else %}
+
+{% endif %}</body>
+
+<h1>Piracy is illegal.Use at your own responsibility.</h1>
 </html>
