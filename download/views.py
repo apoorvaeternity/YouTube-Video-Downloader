@@ -29,9 +29,9 @@ class Download(generic.View):
 
     def post(self, request, *args, **kwargs):
         url = request.POST['url']
-        url = url_corrector(url)  # Converting the urls in a format that is understood by pafy.
+        url = url_corrector(url)  # Converting the urls in a format that is supported by pafy.
 
-        if len(url.split("=")[-1]) != 11:  # Checks whether the url contains the 11 charcater unique video id.
+        if len(url.split("=")[-1]) != 11:  # Checks whether the url contains the 11 character unique video id.
             return HttpResponse('Enter correct url.')
 
         video = pafy.new(url)  # creates a pafy object for a given youtube url.
