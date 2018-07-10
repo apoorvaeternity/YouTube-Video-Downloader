@@ -1,5 +1,7 @@
-pafy==0.5.3.1
-youtube-dl==2017.5.1
-gunicorn==19.6.0
+certifi==2018.4.16
 Django==1.10.4
+gunicorn==19.6.0
 opbeat==3.5.2
+pafy==0.5.4
+urllib3==1.23
+youtube-dl==2018.7.10
