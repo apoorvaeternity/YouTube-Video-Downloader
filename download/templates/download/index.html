@@ -104,7 +104,7 @@
 <div class="well well-lg text-center">
     <form method="post" action="">
         {% csrf_token %}
-        <input class="form-control input-lg" id="inputlg" type="url" name="url" placeholder="Paste the URL here...."
+        <input class="form-control input-lg" id="inputlg" type="url" name="url" placeholder="Paste the URL of YouTube video here...."
                required
                 {% if url %}
                value="{{ url }}"
