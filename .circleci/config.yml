@@ -1,24 +1,22 @@
 version: 2
 jobs:
-  build:
-    #...
   deploy:
     machine:
       enabled: true
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "bd:29:95:94:ae:68:fc:a1:b5:36:e8:6e:5e:e0:51:c2"
       - run:
           name: Deploy Over SSH
           command: |
-            ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
+            ssh $SSH_USER@$SSH_HOST "touch hello.apoorva"
 
 workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build
       - deploy:
-          requires:
-            - build
           filters:
             branches:
               only: master
