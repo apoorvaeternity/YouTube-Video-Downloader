@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/apoorvaeternity/Youtube-Video-Downloader.svg?style=svg)](https://circleci.com/gh/apoorvaeternity/Youtube-Video-Downloader)
 **_Youtube Video Downloader_**
 
 
