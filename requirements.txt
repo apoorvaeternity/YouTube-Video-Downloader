@@ -1,5 +1,5 @@
 certifi==2018.4.16
-Django==1.10.4
+Django==1.11.28
 gunicorn==19.6.0
 opbeat==3.5.2
 pafy==0.5.4
