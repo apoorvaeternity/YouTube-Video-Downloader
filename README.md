@@ -1,10 +1,10 @@
-[![CircleCI](https://circleci.com/gh/apoorvaeternity/Youtube-Video-Downloader.svg?style=svg)](https://circleci.com/gh/apoorvaeternity/Youtube-Video-Downloader)
-**_Youtube Video Downloader_**
+# Youtube Video Downloader
 
 
-Clone the project.
-Go where requirements.txt is located.
-Run command "`pip install -r requirements.txt`"
-Run command "`python manage.py runserver`"
+- Clone the project.
+- Go to root project directory
+- Run command `pip install -r requirements.txt`
+- Set `YOUTUBE_DATA_API_KEY` in your environment (see https://pythonhosted.org/pafy/#api-keys and https://developers.google.com/youtube/v3/getting-started)
+- Run command `python manage.py runserver`
 
-LOVE.PEACE.CODE
+Built on top of django using [pafy](https://github.com/mps-youtube/pafy) and [youtube-dl](https://github.com/ytdl-org/youtube-dl).
