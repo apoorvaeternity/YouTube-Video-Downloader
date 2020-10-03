@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import pafy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'opbeat.contrib.django',
     'download',
 ]
 
@@ -51,15 +51,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-OPBEAT = {
-    'ORGANIZATION_ID': '1a3c0e5cfa6e448eabe14329e9454583',
-    'APP_ID': '8a125a9891',
-    'SECRET_TOKEN': 'e37c5e995a9c5a4392794b52fb18d36d252facd2',
-}
-
-MIDDLEWARE_CLASSES = (
-    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
-)
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
@@ -133,3 +124,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# set pafy YouTube API key
+# see https://pythonhosted.org/pafy/#api-keys and https://developers.google.com/youtube/v3/getting-started
+YOUTUBE_DATA_API_KEY = os.environ['YOUTUBE_DATA_API_KEY']
+pafy.set_api_key(YOUTUBE_DATA_API_KEY)

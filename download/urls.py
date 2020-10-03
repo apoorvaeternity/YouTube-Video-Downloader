@@ -1,6 +1,9 @@
-from django.conf.urls import url
-from download import views
+from django.urls import path
+
+from . import views
+
+app_name = "download"
 
 urlpatterns = [
-    url(r'', views.Download.as_view(), name="index"),
+    path("", views.IndexView.as_view(), name="index"),
 ]

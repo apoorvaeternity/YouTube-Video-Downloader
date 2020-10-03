@@ -1,5 +1,6 @@
-from django.conf.urls import url, include
+from django.conf.urls import include
+from django.urls import path
 
 urlpatterns = [
-    url(r'^', include('download.urls')),
+    path(r"", include('download.urls')),
 ]
